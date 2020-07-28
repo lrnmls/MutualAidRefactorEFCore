@@ -1,0 +1,127 @@
+﻿@model MutualAid.UI.Models.RequestViewModel
+
+@{
+    ViewData["Title"] = "Request Confirmation";
+}
+
+<h1 class="display-4">Request Confirmation</h1>
+<hr />
+<p>Thank you for your submission. Please review below and make sure your request is correct. If not, you can edit or delete it.</p>
+<br />
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ToiletPaper)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ToiletPaper)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PaperTowels)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PaperTowels)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.HandSoap)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.HandSoap)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Shampoo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Shampoo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Conditioner)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Conditioner)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Toothpaste)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Toothpaste)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Disinfectant)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Disinfectant)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Dairy)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Dairy)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Bread)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Bread)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Produce)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Produce)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CannedFood)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CannedFood)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Meat)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Meat)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Seafood)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Seafood)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cereal)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cereal)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pantry)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pantry)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Allergens)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Allergens)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "EditRequest", "Request", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Delete", "DeleteRequest", "Request", new { /* id = Model.PrimaryKey */ }) 
+</div>

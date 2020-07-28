@@ -1,0 +1,413 @@
+﻿@inject MutualAid.UI.Interfaces.IAuthViewService AuthViewService
+@model MutualAid.UI.Models.RequestViewModel
+
+@{
+    var user = AuthViewService.GetCurrentUser();
+    ViewData["Title"] = "Request Details";
+}
+
+<h1 class="display-4">Request Details</h1>
+<hr />
+@if (user.isAdmin)
+{
+    <p>
+        @Html.ActionLink("Edit Request", "EditRequest", "Request", new { reqId = Model.Id }) |
+        @Html.ActionLink("Delete Request", "DeleteRequest", "Request", new { reqId = Model.Id }) |
+    </p>
+    <hr />
+    <div>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Id)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Id)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.User.FirstName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.User.FirstName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.User.LastName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.User.LastName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.User.County)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.User.County)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Date)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Date)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ToiletPaper)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ToiletPaper)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PaperTowels)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PaperTowels)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.HandSoap)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.HandSoap)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Shampoo)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Shampoo)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Conditioner)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Conditioner)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Toothpaste)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Toothpaste)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Disinfectant)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Disinfectant)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Dairy)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Dairy)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Bread)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Bread)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Produce)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Produce)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CannedFood)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CannedFood)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Meat)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Meat)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Seafood)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Seafood)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Cereal)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Cereal)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Pantry)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Pantry)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Allergens)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Allergens)
+            </dd>
+        </dl>
+    </div>
+}
+else if (user.Id == Model.UserId)
+{
+    <p>
+        @Html.ActionLink("Edit Request", "EditRequest", "Request", new { reqId = Model.Id }) |
+        @Html.ActionLink("Delete Request", "DeleteRequest", "Request", new { reqId = Model.Id }) |
+        @Html.ActionLink("Back to Requests", "ViewMyRequests", "UserRequest", new { reqId = Model.Id })
+    </p>
+    <hr />
+    <div>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Id)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Id)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.IsAccepted)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.IsAccepted)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Date)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Date)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ToiletPaper)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ToiletPaper)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PaperTowels)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PaperTowels)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.HandSoap)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.HandSoap)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Shampoo)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Shampoo)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Conditioner)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Conditioner)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Toothpaste)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Toothpaste)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Disinfectant)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Disinfectant)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Dairy)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Dairy)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Bread)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Bread)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Produce)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Produce)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CannedFood)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CannedFood)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Meat)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Meat)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Seafood)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Seafood)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Cereal)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Cereal)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Pantry)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Pantry)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Allergens)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Allergens)
+            </dd>
+        </dl>
+    </div>
+}
+else
+{
+    <p>
+        @Html.ActionLink("Accept Request", "CreateRequest", "Request") |
+        @Html.ActionLink("Back to Requests", "ViewRequests", "UserRequest")
+    </p>
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Id)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Id)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.User.FirstName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.User.FirstName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.User.LastName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.User.LastName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.User.County)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.User.County)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Date)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Date)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ToiletPaper)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ToiletPaper)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PaperTowels)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PaperTowels)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.HandSoap)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.HandSoap)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Shampoo)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Shampoo)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Conditioner)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Conditioner)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Toothpaste)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Toothpaste)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Disinfectant)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Disinfectant)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Dairy)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Dairy)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Bread)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Bread)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Produce)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Produce)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CannedFood)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CannedFood)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Meat)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Meat)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Seafood)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Seafood)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Cereal)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Cereal)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Pantry)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Pantry)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Allergens)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Allergens)
+            </dd>
+        </dl>
+    </div>
+}
