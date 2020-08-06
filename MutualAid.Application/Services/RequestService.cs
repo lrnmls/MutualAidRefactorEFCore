@@ -27,21 +27,21 @@ namespace MutualAid.Application.Services
             return mapper.Map<RequestDto>(req);
         }
 
-        public async Task<IEnumerable<RequestDto>> GetRequestsByUserId(int userId)
+        public async Task<IEnumerable<RequestDto>> GetRequestsByUserIdAsync(int userId)
         {
-            var reqs = await requestRepository.GetRequestsByUserId(userId);
+            var reqs = await requestRepository.GetRequestsByUserIdAsync(userId);
             return mapper.Map<IEnumerable<RequestDto>>(reqs);
         }
 
-        public async Task<IEnumerable<RequestDto>> GetOtherUsersRequestsNotAccepted(int userId)
+        public async Task<IEnumerable<RequestDto>> GetOtherUsersRequestsNotAcceptedAsync(int userId)
         {
-            var reqs = await requestRepository.GetOtherUsersRequestsNotAccepted(userId);
+            var reqs = await requestRepository.GetOtherUsersRequestsNotAcceptedAsync(userId);
             return mapper.Map<IEnumerable<RequestDto>>(reqs);
         }
 
         public async Task<IEnumerable<RequestDto>> GetAllRequestsAsync()
         {
-            var reqs = await requestRepository.GetAllAsync();
+            var reqs = await requestRepository.GetAllRequestsAsync();
             return mapper.Map<IEnumerable<RequestDto>>(reqs);
         }
 
@@ -63,5 +63,11 @@ namespace MutualAid.Application.Services
             var req = mapper.Map<Request>(reqDto);
             return await requestRepository.DeleteAsync(req);
         }
+
+        //public async Task<bool> AddRequestToAcceptedTableAsync(AcceptedRequestDto acceptedRequestDto)
+        //{
+        //    var req = mapper.Map<AcceptedRequest>(acceptedRequestDto);
+        //    return await requestRepository.AddRequestToAcceptedTableAsync(req);
+        //}
     }
 }

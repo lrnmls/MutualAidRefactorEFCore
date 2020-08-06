@@ -10,8 +10,8 @@ namespace MutualAid.Application.Interfaces
     {
         //GET
         Task<RequestDto> GetRequestByRequestIdAsync(int reqId);
-        Task<IEnumerable<RequestDto>> GetRequestsByUserId(int userId);
-        Task<IEnumerable<RequestDto>> GetOtherUsersRequestsNotAccepted(int userId);
+        Task<IEnumerable<RequestDto>> GetRequestsByUserIdAsync(int userId);
+        Task<IEnumerable<RequestDto>> GetOtherUsersRequestsNotAcceptedAsync(int userId);
         Task<IEnumerable<RequestDto>> GetAllRequestsAsync();
 
         //POST

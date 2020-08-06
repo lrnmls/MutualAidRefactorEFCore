@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -48,6 +49,12 @@ namespace MutualAid.UI.Models
         public string IsAcceptedString
         {
             get { return this.toYesNo(this.IsAccepted); }
+        }
+
+        public IList<SelectListItem> UserIds = new List<SelectListItem>();
+        public void ListUsers(string name, int id)
+        {
+            UserIds.Add(new SelectListItem { Text = name, Value = id.ToString() });
         }
     }
 }

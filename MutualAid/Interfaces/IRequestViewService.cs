@@ -10,13 +10,14 @@ namespace MutualAid.UI.Interfaces
     {
         //GET
         Task<RequestViewModel> GetRequestByRequestIdAsync(int reqId);
-        Task<IEnumerable<RequestViewModel>> GetRequestsByUserId(int userId);
-        Task<IEnumerable<RequestViewModel>> GetOtherUsersRequestsNotAccepted(int userId);
+        Task<IEnumerable<RequestViewModel>> GetRequestsByUserIdAsync(int userId);
+        Task<IEnumerable<RequestViewModel>> GetOtherUsersRequestsNotAcceptedAsync(int userId);
         Task<IEnumerable<RequestViewModel>> GetAllRequestsAsync();
 
         //POST
         Task<bool> AddRequestAsync(RequestViewModel model);
         Task<bool> UpdateRequestAsync(RequestViewModel model);
         Task<bool> DeleteRequestAsync(RequestViewModel model);
+        //Task<bool> AddRequestToAcceptedTableAsync(AcceptedRequestViewModel model);
     }
 }

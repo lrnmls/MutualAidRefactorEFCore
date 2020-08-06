@@ -28,15 +28,15 @@ namespace MutualAid.UI.Services
             return mapper.Map<RequestViewModel>(reqDto);
         }
 
-        public async Task<IEnumerable<RequestViewModel>> GetRequestsByUserId(int userId)
+        public async Task<IEnumerable<RequestViewModel>> GetRequestsByUserIdAsync(int userId)
         {
-            var reqDto = await requestService.GetRequestsByUserId(userId);
+            var reqDto = await requestService.GetRequestsByUserIdAsync(userId);
             return mapper.Map<IEnumerable<RequestViewModel>>(reqDto);
         }
 
-        public async Task<IEnumerable<RequestViewModel>> GetOtherUsersRequestsNotAccepted(int userId)
+        public async Task<IEnumerable<RequestViewModel>> GetOtherUsersRequestsNotAcceptedAsync(int userId)
         {
-            var reqs = await requestService.GetOtherUsersRequestsNotAccepted(userId);
+            var reqs = await requestService.GetOtherUsersRequestsNotAcceptedAsync(userId);
             return mapper.Map<IEnumerable<RequestViewModel>>(reqs);
         }
 
@@ -64,5 +64,11 @@ namespace MutualAid.UI.Services
             var reqDto = mapper.Map<RequestDto>(model);
             return await requestService.DeleteRequestAsync(reqDto);
         }
+
+        //public async Task<bool> AddRequestToAcceptedTableAsync(AcceptedRequestViewModel model)
+        //{
+        //    var reqDto = mapper.Map<AcceptedRequestDto>(model);
+        //    return await requestService.AddRequestToAcceptedTableAsync(reqDto);
+        //}
     }
 }

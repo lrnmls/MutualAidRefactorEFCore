@@ -1,0 +1,66 @@
+﻿@model MutualAid.UI.Models.UserViewModel
+
+@{
+    ViewData["Title"] = "User Details";
+}
+
+<h1 class="display-4">User Details</h1>
+<hr />
+<div>
+    @Html.ActionLink("Edit", "EditUser", "User", new { userId = Model.Id }) |
+    @Html.ActionLink("Back to Users", "ViewAllUsers", "User", new { userId = Model.Id })
+</div>
+<br />
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            User Id
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.County)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.County)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.isAdmin)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IsAdminOrUserString)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+    </dl>
+</div>

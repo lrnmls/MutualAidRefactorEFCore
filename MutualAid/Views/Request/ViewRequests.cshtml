@@ -1,0 +1,72 @@
+﻿@model IEnumerable<MutualAid.UI.Models.RequestViewModel>
+@inject MutualAid.UI.Interfaces.IAuthViewService AuthViewService
+@{
+    var user = AuthViewService.GetCurrentUser();
+    ViewData["Title"] = "View User Requests";
+}
+
+<h1 class="display-4">View Requests</h1>
+<hr />
+<div>
+    @Html.ActionLink("Create Request", "CreateRequest", "Request") |
+    @Html.ActionLink("Back to Account", "MyAccount", "Account")
+</div>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.User.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.County)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsAccepted)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.County)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAcceptedString)
+            </td>
+            @if (user.isAdmin)
+            {
+                <td>
+                    @Html.ActionLink("Details", "RequestDetails", "Request", new { reqId = item.Id }) |
+                    @Html.ActionLink("Edit", "EditRequest", "Request", new { reqId = item.Id }) |
+                    @Html.ActionLink("Delete", "DeleteRequest", "Request", new { reqId = item.Id })
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.ActionLink("Details", "RequestDetails", "Request", new { reqId = item.Id })
+                </td>
+            }
+        </tr>
+        }
+    </tbody>
+</table>

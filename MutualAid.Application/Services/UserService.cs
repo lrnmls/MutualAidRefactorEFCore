@@ -23,7 +23,7 @@ namespace MutualAid.Application.Services
         }
 
         //GET methods
-        public async Task<UserDto> GetUserByUserId(int userId)
+        public async Task<UserDto> GetUserByUserIdAsync(int userId)
         {
             var user = await userRepository.GetByIdAsync(userId);
             var userDTO = mapper.Map<UserDto>(user);

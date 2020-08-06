@@ -15,6 +15,7 @@ namespace MutualAid.Application.Interfaces
         void LogOff();
 
         //POST
-        Task<bool> RegisterNewUser(UserDto userDto);
+        Task<bool> RegisterUserAsync(UserDto userDto);
+        Task<bool> ChangeUserPasswordAsync(int userId, string existingPassword, string newPassword);
     }
 }

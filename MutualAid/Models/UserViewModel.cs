@@ -1,4 +1,5 @@
-﻿using MutualAid.Data.Entities;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using MutualAid.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -46,5 +47,33 @@ namespace MutualAid.UI.Models
         public DateTime Created { get; set; }
 
         public IEnumerable<RequestViewModel> Requests { get; set; }
+
+        public string IsAdminOrUserString
+        {
+            get { return this.toUserOrAdmin(this.isAdmin); }
+        }
+        private string toUserOrAdmin(bool b)
+        {
+            return b ? "Admin" : "User";
+        }
+
+        public string TimeOfDay
+        {
+            get { return this.GetTimeOfDay(); }
+        }
+        private string GetTimeOfDay()
+        {
+            int hour = DateTime.Now.Hour;
+
+            if (hour >= 0 && hour < 12)
+            {
+                return "Good Morning";
+            }
+            else if (hour >= 12 && hour < 17)
+            {
+                return "Good afternoon";
+            }
+            return "Good evening";
+        }
     }
 }

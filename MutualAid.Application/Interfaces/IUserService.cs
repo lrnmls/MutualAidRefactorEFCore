@@ -9,7 +9,7 @@ namespace MutualAid.Application.Interfaces
     public interface IUserService : IBaseService
     {
         //GET
-        Task<UserDto> GetUserByUserId(int userId);
+        Task<UserDto> GetUserByUserIdAsync(int userId);
         Task<UserDto> GetUserByEmailAsync(string email);
         Task<IEnumerable<UserDto>> GetAllUsersAsync();
 

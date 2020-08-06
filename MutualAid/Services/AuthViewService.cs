@@ -32,7 +32,7 @@ namespace MutualAid.UI.Services
         public async Task<bool> RegisterNewUser(RegisterViewModel model)
         {
             var userEntity = mapper.Map<UserDto>(model);
-            var userResult = await authService.RegisterNewUser(userEntity);
+            var userResult = await authService.RegisterUserAsync(userEntity);
 
             if (!userResult)
             {
@@ -50,6 +50,12 @@ namespace MutualAid.UI.Services
         public void LogOff()
         {
             authService.LogOff();
+        }
+
+        public async Task<bool> ChangeUserPasswordAsync(int userId, string existingPassword, string newPassword)
+        {
+            var result = await authService.ChangeUserPasswordAsync(userId, existingPassword, newPassword);
+            return result;
         }
     }
 }

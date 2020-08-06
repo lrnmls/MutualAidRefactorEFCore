@@ -1,106 +1,208 @@
 ﻿@model MutualAid.UI.Models.RequestViewModel
-
+@inject MutualAid.UI.Interfaces.IAuthViewService AuthViewService
 @{
+    var user = AuthViewService.GetCurrentUser();
     ViewData["Title"] = "Create Request";
 }
 
 <h1 class="display-4">Create Request</h1>
 <hr />
-<p>
-    @Html.ActionLink("Back to Account", "Index", "User")
-</p>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateRequest" asp-controller="Request" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="UserId" class="form-control" />
-            <div class="form-group">
-                <label asp-for="ToiletPaper" class="control-label"></label>
-                <textarea asp-for="ToiletPaper" class="form-control" rows="4" cols="50"></textarea>
-                <span asp-validation-for="ToiletPaper" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PaperTowels" class="control-label"></label>
-                <textarea asp-for="PaperTowels" class="form-control" rows="4" cols="50"></textarea>
-                <span asp-validation-for="PaperTowels" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HandSoap" class="control-label"></label>
-                <textarea asp-for="HandSoap" class="form-control" rows="4" cols="50"></textarea>
-                <span asp-validation-for="HandSoap" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Shampoo" class="control-label"></label>
-                <textarea asp-for="Shampoo" class="form-control" rows="4" cols="50"></textarea>
-                <span asp-validation-for="Shampoo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Conditioner" class="control-label"></label>
-                <textarea asp-for="Conditioner" class="form-control" rows="4" cols="50"></textarea>
-                <span asp-validation-for="Conditioner" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Toothpaste" class="control-label"></label>
-                <textarea asp-for="Toothpaste" class="form-control" rows="4" cols="50"></textarea>
-                <span asp-validation-for="Toothpaste" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Disinfectant" class="control-label"></label>
-                <textarea asp-for="Disinfectant" class="form-control" rows="4" cols="50"></textarea>
-                <span asp-validation-for="Disinfectant" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Dairy" class="control-label"></label>
-                <textarea asp-for="Dairy" class="form-control" rows="4" cols="50"></textarea>
-                <span asp-validation-for="Dairy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Bread" class="control-label"></label>
-                <textarea asp-for="Bread" class="form-control" rows="4" cols="50"></textarea>
-                <span asp-validation-for="Bread" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Produce" class="control-label"></label>
-                <textarea asp-for="Produce" class="form-control" rows="4" cols="50"></textarea>
-                <span asp-validation-for="Produce" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CannedFood" class="control-label"></label>
-                <textarea asp-for="CannedFood" class="form-control" rows="4" cols="50"></textarea>
-                <span asp-validation-for="CannedFood" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Meat" class="control-label"></label>
-                <textarea asp-for="Meat" class="form-control" rows="4" cols="50"></textarea>
-                <span asp-validation-for="Meat" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Seafood" class="control-label"></label>
-                <textarea asp-for="Seafood" class="form-control" rows="4" cols="50"></textarea>
-                <span asp-validation-for="Seafood" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cereal" class="control-label"></label>
-                <textarea asp-for="Cereal" class="form-control" rows="4" cols="50"></textarea>
-                <span asp-validation-for="Cereal" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Pantry" class="control-label"></label>
-                <textarea asp-for="Pantry" class="form-control" rows="4" cols="50"></textarea>
-                <span asp-validation-for="Pantry" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Allergens" class="control-label"></label>
-                <textarea asp-for="Allergens" class="form-control" rows="4" cols="50"></textarea>
-                <span asp-validation-for="Allergens" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Submit" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+<div>
+    @Html.ActionLink("Back to Account", "MyAccount", "Account")
 </div>
+<br />
+@if (user.isAdmin)
+{
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="CreateRequest" asp-controller="Request" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="User.Id" class="control-label">Please select user: </label>
+                    <select asp-for="User.Id" class="dropdown" asp-items="@Model.UserIds"></select>
+                    <span asp-validation-for="User.Id" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ToiletPaper" class="control-label"></label>
+                    <textarea asp-for="ToiletPaper" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="ToiletPaper" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PaperTowels" class="control-label"></label>
+                    <textarea asp-for="PaperTowels" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="PaperTowels" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="HandSoap" class="control-label"></label>
+                    <textarea asp-for="HandSoap" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="HandSoap" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Shampoo" class="control-label"></label>
+                    <textarea asp-for="Shampoo" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="Shampoo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Conditioner" class="control-label"></label>
+                    <textarea asp-for="Conditioner" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="Conditioner" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Toothpaste" class="control-label"></label>
+                    <textarea asp-for="Toothpaste" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="Toothpaste" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Disinfectant" class="control-label"></label>
+                    <textarea asp-for="Disinfectant" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="Disinfectant" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Dairy" class="control-label"></label>
+                    <textarea asp-for="Dairy" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="Dairy" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Bread" class="control-label"></label>
+                    <textarea asp-for="Bread" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="Bread" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Produce" class="control-label"></label>
+                    <textarea asp-for="Produce" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="Produce" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CannedFood" class="control-label"></label>
+                    <textarea asp-for="CannedFood" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="CannedFood" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Meat" class="control-label"></label>
+                    <textarea asp-for="Meat" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="Meat" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Seafood" class="control-label"></label>
+                    <textarea asp-for="Seafood" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="Seafood" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cereal" class="control-label"></label>
+                    <textarea asp-for="Cereal" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="Cereal" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Pantry" class="control-label"></label>
+                    <textarea asp-for="Pantry" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="Pantry" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Allergens" class="control-label"></label>
+                    <textarea asp-for="Allergens" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="Allergens" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Submit" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="CreateRequest" asp-controller="Request" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="UserId" class="form-control" />
+                <div class="form-group">
+                    <label asp-for="ToiletPaper" class="control-label"></label>
+                    <textarea asp-for="ToiletPaper" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="ToiletPaper" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PaperTowels" class="control-label"></label>
+                    <textarea asp-for="PaperTowels" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="PaperTowels" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="HandSoap" class="control-label"></label>
+                    <textarea asp-for="HandSoap" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="HandSoap" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Shampoo" class="control-label"></label>
+                    <textarea asp-for="Shampoo" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="Shampoo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Conditioner" class="control-label"></label>
+                    <textarea asp-for="Conditioner" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="Conditioner" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Toothpaste" class="control-label"></label>
+                    <textarea asp-for="Toothpaste" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="Toothpaste" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Disinfectant" class="control-label"></label>
+                    <textarea asp-for="Disinfectant" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="Disinfectant" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Dairy" class="control-label"></label>
+                    <textarea asp-for="Dairy" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="Dairy" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Bread" class="control-label"></label>
+                    <textarea asp-for="Bread" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="Bread" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Produce" class="control-label"></label>
+                    <textarea asp-for="Produce" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="Produce" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CannedFood" class="control-label"></label>
+                    <textarea asp-for="CannedFood" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="CannedFood" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Meat" class="control-label"></label>
+                    <textarea asp-for="Meat" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="Meat" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Seafood" class="control-label"></label>
+                    <textarea asp-for="Seafood" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="Seafood" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cereal" class="control-label"></label>
+                    <textarea asp-for="Cereal" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="Cereal" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Pantry" class="control-label"></label>
+                    <textarea asp-for="Pantry" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="Pantry" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Allergens" class="control-label"></label>
+                    <textarea asp-for="Allergens" class="form-control" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="Allergens" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Submit" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

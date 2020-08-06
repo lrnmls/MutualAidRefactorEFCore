@@ -16,5 +16,6 @@ namespace MutualAid.UI.Interfaces
 
         //POST
         Task<bool> RegisterNewUser(RegisterViewModel model);
+        Task<bool> ChangeUserPasswordAsync(int userId, string existingPassword, string newPassword);
     }
 }

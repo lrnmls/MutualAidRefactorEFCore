@@ -1,6 +1,5 @@
 ﻿@inject MutualAid.UI.Interfaces.IAuthViewService AuthViewService
 @model MutualAid.UI.Models.RequestViewModel
-
 @{
     var user = AuthViewService.GetCurrentUser();
     ViewData["Title"] = "Request Details";
@@ -10,10 +9,11 @@
 <hr />
 @if (user.isAdmin)
 {
-    <p>
+    <div>
         @Html.ActionLink("Edit Request", "EditRequest", "Request", new { reqId = Model.Id }) |
         @Html.ActionLink("Delete Request", "DeleteRequest", "Request", new { reqId = Model.Id }) |
-    </p>
+        @Html.ActionLink("Back to Requests", "ViewRequests", "Request", new { reqId = Model.Id })
+    </div>
     <hr />
     <div>
         <dl class="row">
@@ -148,11 +148,20 @@
 }
 else if (user.Id == Model.UserId)
 {
-    <p>
-        @Html.ActionLink("Edit Request", "EditRequest", "Request", new { reqId = Model.Id }) |
-        @Html.ActionLink("Delete Request", "DeleteRequest", "Request", new { reqId = Model.Id }) |
-        @Html.ActionLink("Back to Requests", "ViewMyRequests", "UserRequest", new { reqId = Model.Id })
-    </p>
+    @if (Model.IsAccepted)
+    {
+        <div>
+            @Html.ActionLink("Back to Requests", "ViewMyRequests", "Request", new { reqId = Model.Id })
+        </div>
+    }
+    else
+    {
+        <div>
+            @Html.ActionLink("Edit Request", "EditRequest", "Request", new { reqId = Model.Id }) |
+            @Html.ActionLink("Delete Request", "DeleteRequest", "Request", new { reqId = Model.Id }) |
+            @Html.ActionLink("Back to Requests", "ViewMyRequests", "Request", new { reqId = Model.Id })
+        </div>
+    }
     <hr />
     <div>
         <dl class="row">
@@ -166,7 +175,7 @@ else if (user.Id == Model.UserId)
                 @Html.DisplayNameFor(model => model.IsAccepted)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.IsAccepted)
+                @Html.DisplayFor(model => model.IsAcceptedString)
             </dd>
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.Date)
@@ -276,8 +285,8 @@ else if (user.Id == Model.UserId)
 else
 {
     <p>
-        @Html.ActionLink("Accept Request", "CreateRequest", "Request") |
-        @Html.ActionLink("Back to Requests", "ViewRequests", "UserRequest")
+        @Html.ActionLink("Accept Request", "AcceptRequest", "Request", new { reqId = Model.Id }) |
+        @Html.ActionLink("Back to Requests", "ViewMyRequests", "Request", new { reqId = Model.Id })
     </p>
     <div>
         <hr />

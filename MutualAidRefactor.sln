@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30309.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MutualAid.UI", "MutualAid\MutualAid.UI.csproj", "{FA82042E-5887-4DBA-B19D-51542AB59196}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MutualAid.UI", "MutualAid\MutualAid.UI.csproj", "{FA82042E-5887-4DBA-B19D-51542AB59196}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MutualAid.Framework", "MutualAid.Framework\MutualAid.Framework.csproj", "{F8998622-6D03-4C70-A01A-66482635DC64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MutualAid.Framework", "MutualAid.Framework\MutualAid.Framework.csproj", "{F8998622-6D03-4C70-A01A-66482635DC64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MutualAid.Data", "MutualAid.Data\MutualAid.Data.csproj", "{70D53FAF-2C55-4CB9-9711-9548B9F345D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MutualAid.Data", "MutualAid.Data\MutualAid.Data.csproj", "{70D53FAF-2C55-4CB9-9711-9548B9F345D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MutualAid.Application", "MutualAid.Application\MutualAid.Application.csproj", "{79A1BAE0-F5BF-4CBA-9A2C-4CA5D98746B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MutualAid.Application", "MutualAid.Application\MutualAid.Application.csproj", "{79A1BAE0-F5BF-4CBA-9A2C-4CA5D98746B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MutualAid.Application.UnitTest", "MutualAid.Application.UnitTest\MutualAid.Application.UnitTest.csproj", "{95FFDEA7-274C-4555-B054-F0E0547153A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{79A1BAE0-F5BF-4CBA-9A2C-4CA5D98746B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79A1BAE0-F5BF-4CBA-9A2C-4CA5D98746B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79A1BAE0-F5BF-4CBA-9A2C-4CA5D98746B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95FFDEA7-274C-4555-B054-F0E0547153A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95FFDEA7-274C-4555-B054-F0E0547153A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95FFDEA7-274C-4555-B054-F0E0547153A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95FFDEA7-274C-4555-B054-F0E0547153A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

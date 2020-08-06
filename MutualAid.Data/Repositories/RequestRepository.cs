@@ -7,6 +7,7 @@ using MutualAid.Data.Entities;
 using MutualAid.Data.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -18,10 +19,11 @@ namespace MutualAid.Data.Repositories
     {
         public RequestRepository(MutualAidContext dbContext) : base(dbContext)
         {
+
         }
 
         //GET methods
-        public async Task<IEnumerable<Request>> GetRequestsByUserId(int userId)
+        public async Task<IEnumerable<Request>> GetRequestsByUserIdAsync(int userId)
         {
             return await DbContext.Set<Request>()
                 .Where(x => x.UserId == userId)
@@ -36,7 +38,14 @@ namespace MutualAid.Data.Repositories
                 .FirstOrDefaultAsync(x => x.Id == reqId);
         }
 
-        public async Task<IEnumerable<Request>> GetOtherUsersRequestsNotAccepted(int userId)
+        public async Task<IEnumerable<Request>> GetAllRequestsAsync()
+        {
+            return await DbContext.Set<Request>()
+                .Include(x => x.User)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Request>> GetOtherUsersRequestsNotAcceptedAsync(int userId)
         {
             return await DbContext.Set<Request>()
                 .Where(x => x.UserId != userId)
@@ -45,20 +54,18 @@ namespace MutualAid.Data.Repositories
                 .ToListAsync();
         }
 
-        //POST methods
-        public Task<bool> AddRequestToAcceptedTable(int reqId, int userId)
-        {
-            throw new NotImplementedException();
-        }
+        //public async Task<bool> AddRequestToAcceptedTableAsync(AcceptedRequest acceptedRequest)
+        //{
+        //    DbContext.Set<AcceptedRequest>().Add(acceptedRequest);
+        //    var req = await GetRequestByRequestIdAsync(acceptedRequest.RequestId);
+        //    ChangeAcceptedToTrue(req);
+        //    return await DbContext.SaveChangesAsync() > 0;
+        //}
 
-        public Task<bool> ChangeAcceptedToTrue(Request req)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> ChangeAcceptedToFalse(Request req)
-        {
-            throw new NotImplementedException();
-        }
+        //public void ChangeAcceptedToTrue(Request req)
+        //{
+        //    req.IsAccepted = true;
+        //    DbContext.Set<Request>().Update(req).Property(x => x.IsAccepted);
+        //}
     }
 }

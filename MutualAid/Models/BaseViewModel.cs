@@ -8,7 +8,7 @@ namespace MutualAid.UI.Models
 {
     public class BaseViewModel
     {
-        [DisplayName("Confirmation #")]
+        [DisplayName("Request #")]
         public int Id { get; set; }
     }
 }

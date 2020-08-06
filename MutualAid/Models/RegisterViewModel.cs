@@ -10,39 +10,41 @@ namespace MutualAid.UI.Models
 {
     public class RegisterViewModel : BaseViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Email address required")]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Password required")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm Password")]
+        [Required(ErrorMessage = "Confirm password required")]
         [Compare("Password", ErrorMessage = "Passwords do not match. Please try again.")]
         public string ConfirmPassword { get; set; }
 
         [Required]
         public string Salt { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "First name required")]
         [DisplayName("First Name")]
         public string FirstName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Last name required")]
         [DisplayName("Last Name")]
         public string LastName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Phone number required")]
         [DataType(DataType.PhoneNumber)]
         [DisplayName("Phone Number")]
         public string PhoneNumber { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "County required")]
         [DisplayName("County")]
         public string County { get; set; }
 
+        [Required]
         [DisplayName("Role")]
         public bool isAdmin { get; set; } 
 

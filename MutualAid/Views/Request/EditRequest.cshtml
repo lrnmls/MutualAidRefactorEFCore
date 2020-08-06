@@ -1,14 +1,23 @@
 ﻿@model MutualAid.UI.Models.RequestViewModel
-
+@inject MutualAid.UI.Interfaces.IAuthViewService AuthViewService
 @{
+    var user = AuthViewService.GetCurrentUser();
     ViewData["Title"] = "Edit Request";
 }
 
 <h1 class="display-4">Edit Request</h1>
 <hr />
-<p>
-    @Html.ActionLink("Back to Account", "Index", "User")
-</p>
+<div>
+    @if (user.isAdmin)
+    {
+        @Html.ActionLink("Back to Requests", "MyAccount", "AdminRequest")
+    }
+    else
+    {
+        @Html.ActionLink("Back to Requests", "ViewRequests", "UserRequest")
+    }
+    | @Html.ActionLink("Back to Account", "MyAccount", "Account")
+</div>
 <hr />
 <div class="row">
     <div class="col-md-4">

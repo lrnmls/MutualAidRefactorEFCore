@@ -36,20 +36,24 @@ namespace MutualAid.Data.Repositories
             return null;
         }
 
-        public async Task<bool> RegisterNewUser(User user)
+        public async Task<bool> RegisterUserAsync(User user)
         {
-            var hashProvider = new HashProvider();
-            var passwordHash = hashProvider.HashPassword(user.Password);
-
-            user.Password = passwordHash.Password;
-            user.Salt = passwordHash.Salt;
-            user.Created = DateTime.Now;
-
-            var result = await userRepository.AddAsync(user);
-
-            if (result)
+            var userExists = userRepository.GetUserByEmailAsync(user.Email);
+            if (userExists.Result == null)
             {
-                return true;
+                var hashProvider = new HashProvider();
+                var passwordHash = hashProvider.HashPassword(user.Password);
+
+                user.Password = passwordHash.Password;
+                user.Salt = passwordHash.Salt;
+                user.Created = DateTime.Now;
+
+                var result = await userRepository.AddAsync(user);
+
+                if (result)
+                {
+                    return true;
+                }
             }
             return false;
         }
@@ -74,6 +78,21 @@ namespace MutualAid.Data.Repositories
         public void LogOff()
         {
             Session.Clear();
+        }
+
+        public async Task<bool> ChangeUserPasswordAsync(int userId, string existingPassword, string newPassword)
+        {
+            var hashProvider = new HashProvider();
+            var user = await userRepository.GetByIdAsync(userId);
+
+            if (user != null && hashProvider.VerifyPasswordMatch(user.Password, existingPassword, user.Salt))
+            {
+                var newHash = hashProvider.HashPassword(newPassword);
+                user.Password = newHash.Password;
+                user.Salt = newHash.Salt;
+            }
+            var result = await userRepository.UpdateAsync(user);
+            return result;
         }
     }
 

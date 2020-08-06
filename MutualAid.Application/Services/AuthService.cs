@@ -12,13 +12,11 @@ namespace MutualAid.Application.Services
 {
     public class AuthService : BaseService<User>, IAuthService
     {
-        private readonly IUserRepository userRepository;
         private readonly IAuthRepository authRepository;
         private readonly IMapper mapper;
 
-        public AuthService(IUserRepository userRepository, IAuthRepository authRepository, IMapper mapper) : base(userRepository, mapper)
+        public AuthService(IAuthRepository authRepository, IMapper mapper) : base(authRepository, mapper)
         {
-            this.userRepository = userRepository;
             this.authRepository = authRepository;
             this.mapper = mapper;
         }
@@ -31,10 +29,10 @@ namespace MutualAid.Application.Services
         }
 
         //POST methods
-        public async Task<bool> RegisterNewUser(UserDto userDto)
+        public async Task<bool> RegisterUserAsync(UserDto userDto)
         {
             var user = mapper.Map<User>(userDto);
-            return await authRepository.RegisterNewUser(user);
+            return await authRepository.RegisterUserAsync(user);
         }
 
         public async Task<UserDto> SignInAsync(string email, string password)
@@ -46,6 +44,12 @@ namespace MutualAid.Application.Services
         public void LogOff()
         {
             authRepository.LogOff();
+        }
+
+        public async Task<bool> ChangeUserPasswordAsync(int userId, string existingPassword, string newPassword)
+        {
+            var result= await authRepository.ChangeUserPasswordAsync(userId, existingPassword, newPassword);
+            return result;
         }
     }
 }

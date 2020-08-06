@@ -24,11 +24,6 @@ namespace MutualAid.Data.Repositories
             return await DbContext.Set<TType>().FindAsync(id);
         }
 
-        //public async Task<IReadOnlyList<TType>> GetAllByIdAsync(int id)
-        //{
-        //    return await DbContext.Set<IReadOnlyList<TType>>().FindAsync(id);
-        //}
-
         public async Task<IReadOnlyList<TType>> GetAllAsync()
         {
             return await DbContext.Set<TType>().ToListAsync();

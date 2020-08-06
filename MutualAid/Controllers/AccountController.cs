@@ -22,21 +22,36 @@ namespace MutualAid.UI.Controllers
             this.authViewService = authViewService;
         }
 
-        public ActionResult RegisterNewUser()
+        public ActionResult MyAccount()
+        {
+            return View(authViewService.GetCurrentUser());
+        }
+
+        public ActionResult RegisterUser()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> RegisterNewUser(RegisterViewModel model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RegisterUser(RegisterViewModel model)
         {
             var result = await authViewService.RegisterNewUser(model);
             if (result)
             {
-                TempData["RegistrationSuccess"] = "You're one step closer to using Mutual Aid! Please sign in to continue.";
-                return RedirectToAction("SignIn", "Account");
+                var user = authViewService.GetCurrentUser();
+                if(user == null)
+                {
+                    TempData["RegistrationSuccess"] = "You're one step closer to using Mutual Aid! Please sign in to continue.";
+                    return RedirectToAction("SignIn", "Account");
+                }
+                if(user.isAdmin)
+                {
+                    TempData["UserRegistrationSuccess"] = "User successfully added!";
+                    return RedirectToAction("MyAccount", "Account");
+                }
             }
-            return View(model);
+            return View();
         }
 
         public IActionResult SignIn()
@@ -45,18 +60,14 @@ namespace MutualAid.UI.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> SignIn(string email, string password)
         {
             var user = await authViewService.SignInAsync(email, password);
             if(user != null)
             {
-                if (!user.isAdmin)
-                {
-                    return RedirectToAction("Index", "User", user);
-                }
-                return RedirectToAction("Index", "Admin", user);
+                return RedirectToAction("MyAccount", "Account", user);
             }
-            TempData["UserNotFound"] = "No user exists with this email, please try again or register an account.";
             return View();
         }
 

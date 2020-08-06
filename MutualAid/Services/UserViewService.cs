@@ -31,7 +31,7 @@ namespace MutualAid.UI.Services
 
         public async Task<UserViewModel> GetUserByIdAsync(int userId)
         {
-            var userDto = await userService.GetUserByUserId(userId);
+            var userDto = await userService.GetUserByUserIdAsync(userId);
             return mapper.Map<UserViewModel>(userDto);
         }
 

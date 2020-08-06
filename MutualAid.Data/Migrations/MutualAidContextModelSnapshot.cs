@@ -19,6 +19,33 @@ namespace MutualAid.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("MutualAid.Data.Entities.AcceptedRequest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RequestId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RequestId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Accepted Request");
+                });
+
             modelBuilder.Entity("MutualAid.Data.Entities.Request", b =>
                 {
                     b.Property<int>("Id")
@@ -149,7 +176,7 @@ namespace MutualAid.Data.Migrations
                         {
                             Id = 1,
                             County = "Franklin",
-                            Created = new DateTime(2020, 7, 28, 15, 6, 11, 818, DateTimeKind.Local).AddTicks(7257),
+                            Created = new DateTime(2020, 7, 30, 10, 28, 53, 949, DateTimeKind.Local).AddTicks(1804),
                             Email = "lauren.miles@kizan.com",
                             FirstName = "Lauren",
                             LastName = "Miles",
@@ -158,6 +185,21 @@ namespace MutualAid.Data.Migrations
                             Salt = "ItM0F+lRxK4=",
                             isAdmin = true
                         });
+                });
+
+            modelBuilder.Entity("MutualAid.Data.Entities.AcceptedRequest", b =>
+                {
+                    b.HasOne("MutualAid.Data.Entities.Request", "Request")
+                        .WithMany()
+                        .HasForeignKey("RequestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MutualAid.Data.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MutualAid.Data.Entities.Request", b =>

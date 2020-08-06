@@ -44,12 +44,12 @@ namespace MutualAid.UI
 
             services.AddControllersWithViews();
 
-            //services.AddDbContext<MutualAidContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MutualAidDB")));
-
             services.AddAutoMapper(typeof(Startup), typeof(Application.MappingProfiles.UserMappingProfile));
             services.AddAutoMapper(typeof(Startup), typeof(UI.MappingProfiles.UserMappingProfile));
             services.AddAutoMapper(typeof(Startup), typeof(Application.MappingProfiles.RequestMappingProfile));
             services.AddAutoMapper(typeof(Startup), typeof(UI.MappingProfiles.RequestMappingProfile));
+            services.AddAutoMapper(typeof(Startup), typeof(Application.MappingProfiles.AcceptedRequestMappingProfile));
+            services.AddAutoMapper(typeof(Startup), typeof(UI.MappingProfiles.AcceptedRequestMappingProfile));
 
             services.AddSession(options =>
             {
@@ -65,14 +65,14 @@ namespace MutualAid.UI
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IRequestRepository, RequestRepository>();
-            //services.AddScoped<IAcceptedRequestRepository, AcceptedRequestRepository>();
+            services.AddScoped<IAcceptedRequestRepository, AcceptedRequestRepository>();
         }
 
         private void ConfigureViewServices(IServiceCollection services)
         {
             services.AddScoped<IUserViewService, UserViewService>();
             services.AddScoped<IRequestViewService, RequestViewService>();
-            //services.AddScoped<IAcceptedRequestViewService, AcceptedRequestViewService>();
+            services.AddScoped<IAcceptedRequestViewService, AcceptedRequestViewService>();
             services.AddScoped<IAuthViewService, AuthViewService>();
         }
 
@@ -80,7 +80,7 @@ namespace MutualAid.UI
         {
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRequestService, RequestService>();
-            //services.AddScoped<IAcceptedRequestService, AcceptedRequestService>();
+            services.AddScoped<IAcceptedRequestService, AcceptedRequestService>();
             services.AddScoped<IAuthService, AuthService>();
         }
 
@@ -126,6 +126,9 @@ namespace MutualAid.UI
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+          name: "areas",
+          pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

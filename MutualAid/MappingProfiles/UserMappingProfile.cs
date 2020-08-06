@@ -15,6 +15,12 @@ namespace MutualAid.UI.MappingProfiles
             CreateMap<UserViewModel, UserDto>();
             CreateMap<UserDto, RegisterViewModel>();
             CreateMap<RegisterViewModel, UserDto>();
+            CreateMap<UserViewModel, UserPasswordViewModel>();
+            CreateMap<UserPasswordViewModel, UserViewModel>();
+            CreateMap<UserViewModel, UserPasswordViewModel>()
+                .ForMember(x => x.ExistingPassword, opt => opt.MapFrom(src => src.Password));
+            CreateMap<UserPasswordViewModel, UserViewModel>()
+              .ForMember(x => x.Password, opt => opt.MapFrom(src => src.ExistingPassword));
         }
     }
 }

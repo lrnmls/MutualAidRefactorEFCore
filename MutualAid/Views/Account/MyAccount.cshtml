@@ -1,0 +1,32 @@
+﻿@model MutualAid.UI.Models.UserViewModel
+@inject MutualAid.UI.Interfaces.IAuthViewService AuthViewService
+@{
+    var user = AuthViewService.GetCurrentUser();
+    ViewData["Title"] = "My Account";
+}
+<h4 class="display-1">@Model.TimeOfDay, @Model.FirstName!</h4>
+<hr />
+<p>@TempData["UserEditSuccess"]</p>
+<p>@TempData["UserRegistrationSuccess"]</p>
+<p>@TempData["ChangePasswordSuccess"]</p>
+@if (user.isAdmin)
+{
+<ul>
+    <li><a asp-controller="Request" asp-action="CreateRequest">Create New Request</a></li>
+    <li><a asp-controller="Request" asp-action="ViewRequests">View Requests</a></li>
+    <li>@Html.ActionLink("Edit My Information", "EditUser", "User", new { userId = user.Id })</li>
+    <li>@Html.ActionLink("Change Password", "EditUserPassword", "User", new { userId = user.Id })</li>
+    <li><a asp-controller="Account" asp-action="RegisterUser">Create New User</a></li>
+    <li><a asp-controller="User" asp-action="ViewAllUsers">View All Users</a></li>
+</ul>
+}
+else
+{
+<ul>
+    <li><a asp-controller="Request" asp-action="CreateRequest">Create New Request</a></li>
+    <li><a asp-controller="Request" asp-action="ViewMyRequests">View My Requests</a></li>
+    <li><a asp-controller="Request" asp-action="ViewRequests">View Users Requests</a></li>
+    <li>@Html.ActionLink("Edit My Information", "EditUser", "User", new { userId = user.Id })</li>
+    <li>@Html.ActionLink("Change Password", "EditUserPassword", "User", new { userId = user.Id })</li>
+</ul>
+}

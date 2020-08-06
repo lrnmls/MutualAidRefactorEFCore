@@ -9,13 +9,13 @@ namespace MutualAid.Data.Interfaces
     public interface IRequestRepository : IBaseRepository<Request>
     {
         //GET
-        Task<IEnumerable<Request>> GetRequestsByUserId(int userId);
+        Task<IEnumerable<Request>> GetRequestsByUserIdAsync(int userId);
         Task<Request> GetRequestByRequestIdAsync(int reqId);
-        Task<IEnumerable<Request>> GetOtherUsersRequestsNotAccepted(int userId);
+        Task<IEnumerable<Request>> GetOtherUsersRequestsNotAcceptedAsync(int userId);
+        Task<IEnumerable<Request>> GetAllRequestsAsync();
 
         //POST
-        Task<bool> AddRequestToAcceptedTable(int reqId, int userId);
-        Task<bool> ChangeAcceptedToTrue(Request req);
-        Task<bool> ChangeAcceptedToFalse(Request req);
+        //Task<bool> AddRequestToAcceptedTableAsync(AcceptedRequest acceptedRequest);
+        //void ChangeAcceptedToTrue(Request req);
     }
 }
